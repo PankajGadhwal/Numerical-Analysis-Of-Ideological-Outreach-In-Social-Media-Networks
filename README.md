@@ -1,115 +1,202 @@
-# Numerical Analysis of Ideological Outreach in Social Media Networks
+# Numerical Analysis Of Ideological Outreach In Social Media Networks
 
-## Project Overview
-This project aims to develop a numerical simulation model to analyze the process of ideological outreach within social media networks. By employing numerical methods, the study seeks to uncover the mechanisms and patterns through which various ideologies spread across digital platforms. This enables the formulation of informed strategies to understand and engage with these dissemination processes effectively.
+This project aims to develop a numerical simulation model that analyzes the process of ideological outreach within social media networks. By employing numerical methods, this study seeks to uncover the mechanisms and patterns through which various ideologies spread across digital platforms, enabling the formulation of informed strategies to understand and engage with these dissemination processes effectively.
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Network Model](#network-model)
 - [Assumptions](#assumptions)
-- [Governing Equations and Parameters](#governing-equations-and-parameters)
+- [Attributes and Parameters](#attributes-and-parameters)
+- [Governing Equations](#governing-equations)
+- [Initial Conditions](#initial-conditions)
+- [Numerical Solution](#numerical-solution)
 - [Numerical Simulation Algorithm](#numerical-simulation-algorithm)
-- [Analysis](#analysis)
-  - [Small Network](#small-network)
-  - [Community Type Network](#community-type-network)
-  - [Twitter-like Network](#twitter-like-network)
-  - [Election Campaigning Analysis](#election-campaigning-analysis)
-- [Results and Discussion](#results-and-discussion)
+- [Scenario-Specific Sensitivity Analysis](#scenario-specific-sensitivity-analysis)
+  - [Small Network Analysis (Single Sect Model)](#small-network-analysis-single-sect-model)
+  - [Community Type Network Analysis (Single Sect Model)](#community-type-network-analysis-single-sect-model)
+  - [Twitter Type Network Analysis (Influencer Model)](#twitter-type-network-analysis-influencer-model)
+  - [Election Campaigning Analysis (Dual Sect Model)](#election-campaigning-analysis-dual-sect-model)
 - [References](#references)
 
 ## Introduction
-Understanding the dynamics of ideological outreach on social media networks is crucial for comprehending the influence of these platforms on society and politics. The aim of this project is to develop a numerical simulation model that analyzes the process of ideological outreach within social media networks.
+
+Ideological Outreach refers to the deliberate dissemination and promotion of specific beliefs, ideologies, or perspectives through social media networks. This project analyzes ideological outreach and the most important governing attributes in the following scenarios:
+
+1. Small Network
+2. Community Type Network
+3. Twitter-like network
+4. Election Campaigning Analysis
 
 ## Network Model
-A synthetic social media network is created using the NetworkX library in Python, where individuals are represented as nodes and connections as edges. The following steps are taken to generate the graph:
-1. Create a graph with a fixed number of nodes.
-2. Assign a random number of connections to each node based on a Gaussian distribution.
-3. Connect each node to N other nodes randomly selected.
-4. Store the graph as an adjacency list.
-5. Assign attributes to each node, including content engagement, social interaction, receptiveness, and network position.
+
+The NetworkX library of Python is used to create a synthetic social media network. In this network, the nodes represent people, and the edges represent connections between people on the platform. Each person (node) is assigned attributes quantifying content engagement, social interaction, receptiveness, and network position.
 
 ## Assumptions
-1. A network of 1000 people is analyzed to keep the algorithm’s runtime manageable.
-2. The distribution of properties, like activity and number of connections, follows a Gaussian distribution.
 
-## Governing Equations and Parameters
-### Ideology (\(i\))
-Represents the current level of acceptance of an idea by a person. The growth rate is logarithmic.
-### Receptiveness (\(R\))
-Refers to an individual's openness to new ideologies.
-### Activity (\(A\))
-Measures the level of engagement within the social media network.
-### Persuasiveness (\(P\))
-The ability to influence others regarding specific ideologies.
-### Suggestibility (\(S\))
-The degree to which an individual is prone to adopting new ideologies.
-### Exponential Factor (\(E\))
-Represents the size of the network.
+1. A network of 1000 people has been analyzed to keep the algorithm's runtime within limits.
+2. The distribution of properties of individuals, like activity and number of connections, has been considered to be Gaussian in nature.
 
-### Equations
-#### Persuasion Power
-\[ P_a \propto i_a A_a \]
-\[ P_a = k_1 i_a A_a + c_1 \]
+## Attributes and Parameters
 
-#### Suggestibility
-\[ S_b = \frac{E}{(P_a^{-1/E-1})(E^{-S_b})} \]
+The following characteristics characterize each person (node):
+
+1. **Ideology (i)**: This parameter demarcates the current level of acceptance of the idea by the person. A negative value indicates opposition to the idea. The scale is not linear in nature, and the growth rate is logarithmic.
+
+2. **Receptiveness (R)**: Refers to an individual's openness and willingness to accept and engage with new ideologies presented within the social media environment.
+
+3. **Activity (A)**: Activity signifies the level of engagement and participation of an individual within the social media network, which sums up actions such as posting, commenting, sharing, and interacting with other users and content.
+
+4. **Persuasiveness (P)**: Persuasion power measures an individual's ability to influence and convince others regarding specific ideologies or viewpoints through their communication and persuasive skills within the social media space.
+
+5. **Suggestibility (S)**: Suggestibility represents the degree to which an individual is prone to adopting or being influenced by external ideologies presented within the social media network, indicating their susceptibility to external influence.
+
+6. **Exponential Factor (E)**: Represents the size of the network.
+
+7. **Acceptance Value**: The ideological value upon reaching which an individual is considered to have accepted the idea.
+
+8. **Single Sect Model**: No opposing ideology is considered. The values of ideologies are zero or positive.
+
+9. **Dual Sect Model**: Opposing ideologies are considered. The value of ideologies can be negative, zero, or positive.
+
+## Governing Equations
+
+The governing equations for the spread of ideas within the network are derived based on the influence of interactions, exposure, and resistance to new ideas.
+
+### Persuasion Power (P)
+
+$$P_a = i_a A_a$$
+
+### Suggestibility (S)
+
+$$S_a = i_a A_a R_a^2$$
+
+### Ideological Evolution
+
+For case (I): Both individuals have the same ideological alignment.
+
+$$\frac{di_b}{dt} = (\frac{E^{P_a} - 1}{E - 1})(E^{-S_b})$$
+
+For case (II): The two individuals had opposing ideologies.
+
+$$\frac{di_b}{dt} = (\frac{E^{P_a} - 1}{E - 1})(E^{\frac{S_b}{10}})$$
+
+## Initial Conditions
+
+- Truncated Gaussian distribution has been used to distribute attribute values to people (nodes).
+- Activity and Receptiveness: The general distribution of activity has the following parameters - μ = 1, σ = 0.1, a = 0.9, b = 1.1.
+- Initial Ideology Values: Relevant initial ideological values have been considered in respective scenarios.
+- Duration: The algorithm is run for a period of 100 days, that is, 100 iterations.
+
+## Numerical Solution
+
+The Euler's first-order approximation method is used to perform the iterations and update the ideological values over time.
+
+For case (I):
+
+$$(i_b)_{j+1} = (i_b)_j + (\frac{E^{P_a} - 1}{E - 1})(E^{-S_b})$$
+
+For case (II):
+
+$$(i_b)_{j+1} = (i_b)_j + (\frac{E^{P_a} - 1}{E - 1})(E^{\frac{S_b}{10}})$$
 
 ## Numerical Simulation Algorithm
-1. Initialize the network and assign attributes to each node.
-2. Calculate persuasion power and suggestibility for each individual.
-3. Simulate the propagation of ideologies using Euler's method for 100 days.
-4. Update ideological values daily based on interactions between connected nodes.
 
-## Analysis
-### Small Network
-Initial conditions: Ideology distribution follows a truncated Gaussian distribution.
+The numerical simulation algorithm follows these steps:
 
-#### Graphs
-![Small Network - Initial Situation](images/small_network_initial.png)
-![Small Network - After 100 Days](images/small_network_100_days.png)
+1. Create a network of nodes (people) and distribute the number of connections for each person randomly using a truncated Gaussian distribution.
+2. Create an adjacency list based on the number of connections of each node.
+3. For each node, create a vector storing the attributes (ideology, activity, and receptiveness) and initialize their values using a truncated Gaussian distribution.
+4. Calculate the attributes of persuasion power and suggestibility for each individual using the derived equations.
+5. Update the attributes of each node after a day (in each iteration) by calculating the updated ideologies based on interactions with direct connections.
+6. Update the final ideology of nodes after a day (end of an iteration) based on the calculated values from the previous step.
+7. Calculate the new values of persuasion power and suggestibility using the updated ideology values.
+8. Run the above algorithm for the required number of iterations, where one iteration corresponds to one day.
 
-### Community Type Network
-#### Graphs
-![Community Network - Initial Situation](images/community_network_initial.png)
-![Community Network - After 100 Days](images/community_network_100_days.png)
+## Scenario-Specific Sensitivity Analysis
 
-### Twitter-like Network
-#### Graphs
-![Twitter-like Network - Initial Situation](images/twitter_network_initial.png)
-![Twitter-like Network - After 100 Days](images/twitter_network_100_days.png)
+### Small Network Analysis (Single Sect Model)
 
-### Election Campaigning Analysis
-Aim: Analyze the factors influencing people's choices in an election.
+This analysis elucidates the understanding of the mathematical model and the simulation algorithm, as well as verifies the accuracy of the model by analyzing a small network of 20 people with a single-sect model (no opposing view).
 
-#### Initial Conditions
-- Ideology: Truncated Gaussian distribution with \( \mu = 0 \) and \( \sigma = 0.2 \).
+Initial Network:
+![Initial Network](path/to/initial-network.png)
 
-#### Base Condition
-- Party A: 33.3%
-- Party B: 14.4%
+Network after 200 days:
+![Network after 200 days](path/to/network-after-200-days.png)
 
-![Election Base Condition](images/election_base_condition.png)
+Network after 300 days:
+![Network after 300 days](path/to/network-after-300-days.png)
 
-#### High Connections
-- Party A given 20 people with 200 connections each.
-- Party A: 39.8%
-- Party B: 16.2%
+Network after 400 days:
+![Network after 400 days](path/to/network-after-400-days.png)
 
-![High Connections](images/election_high_connections.png)
+### Community Type Network Analysis (Single Sect Model)
 
-#### High Connections vs. High Count
-- Party A given 4 people with 400 connections.
-- Party B given 20 people with 50 connections.
-- Party A: 39.2%
-- Party B: 7%
+This analysis aims to understand the relationship between the network's overall ideological acceptance and how strongly connected the network is. The number of connections of an individual is varied from 10 to 200.
 
-![High Connections vs. High Count](images/election_high_connections_vs_count.png)
+At 10 connections:
+![At 10 connections](path/to/at-10-connections.png)
 
-## Results and Discussion
-- Influencers significantly impact ideological propagation in small and community-type networks.
-- In Twitter-like networks, the spread is rapid due to high connectivity.
-- In election scenarios, highly connected individuals are more influential than a larger number of less connected individuals.
+At 50 connections:
+![At 50 connections](path/to/at-50-connections.png)
+
+At 200 connections:
+![At 200 connections](path/to/at-200-connections.png)
+
+The analysis shows that as the network becomes more strongly connected, a higher percentage of people accept the ideology in the same time period of 100 days.
+
+### Twitter Type Network Analysis (Influencer Model)
+
+The aim is to understand how powerfully a highly connected individual (influencer) can impact the overall ideological alignment of the network. A few individuals (influencers) with a high number of connections (300) are induced in the network.
+
+Visualization of the network model:
+![Visualization of the network model](path/to/network-visualization.png)
+
+The following graphs show the network after 100 days without the influencers:
+
+After 100 days:
+![After 100 days without influencers](path/to/without-influencers-after-100-days.png)
+
+Initial situation:
+![Initial situation without influencers](path/to/without-influencers-initial.png)
+
+The following graphs show the network after 100 days with the influencers:
+
+After 100 days:
+![After 100 days with influencers](path/to/with-influencers-after-100-days.png)
+
+Initial situation:
+![Initial situation with influencers](path/to/with-influencers-initial.png)
+
+The analysis shows that the influencers were able to convince people much more of their ideologies in comparison to a normal community-type network.
+
+### Election Campaigning Analysis (Dual Sect Model)
+
+This analysis aims to understand the most important factors that influence people's choice in an election. Two parties, A and B, are considered. Positive ideology value indicates support for party A, and negative ideology value indicates support for party B.
+
+Base Condition:
+After 100 days:
+- Party A - 33.3%
+- Party B - 14.4%
+
+![Base condition](path/to/base-condition.png)
+
+Impact of High Connections:
+Party A is given 20 people with 200 connections each.
+After 100 days:
+- Party A - 39.8%
+- Party B - 16.2%
+
+High Connections versus High Count:
+Party A is given 4 people with 400 connections, and Party B is given 20 people with 50 connections.
+After 100 days:
+- Party A - 39.2%
+- Party B - 7%
+
+The analysis shows that highly influential individuals (with high connections) win over a large number of less connected individuals from the opposing party.
 
 ## References
-1. ['Truncated Normal Distribution', Wikipedia](https://en.wikipedia.org/wiki/Truncated_normal_distribution)
-2. ['Inside Twitter: An In-Depth Look Inside the Twitter World', Sysomos](https://en.wikipedia.org/wiki/Truncated_normal_distribution)
+
+[1] 'Truncated Normal Distribution', Wikipedia.org, Link: https://en.wikipedia.org/wiki/Truncated_normal_distribution
+[2] 'Inside Twitter: An In-Depth Look Inside the Twitter World', Sysomos, April 2014.
