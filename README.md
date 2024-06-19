@@ -181,6 +181,11 @@ After 100 days:
 
 The analysis shows that highly influential individuals (with high connections) win over a large number of less connected individuals from the opposing party.
 
+## Contributors
+
+Bhoumik Patidar
+Dewansh Kumar
+
 ## References
 
 [1] 'Truncated Normal Distribution', Wikipedia.org, Link: https://en.wikipedia.org/wiki/Truncated_normal_distribution
