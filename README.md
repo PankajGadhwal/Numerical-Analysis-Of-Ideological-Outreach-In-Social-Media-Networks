@@ -119,30 +119,18 @@ The numerical simulation algorithm follows these steps:
 
 This analysis elucidates the understanding of the mathematical model and the simulation algorithm, as well as verifies the accuracy of the model by analyzing a small network of 20 people with a single-sect model (no opposing view).
 
-Initial Network:
-![Initial Network](path/to/initial-network.png)
+Visualization Of Simulation On Small Network:
+![Network Evolution](Images/small_network_analysis.png)
 
-Network after 200 days:
-![Network after 200 days](path/to/network-after-200-days.png)
 
-Network after 300 days:
-![Network after 300 days](path/to/network-after-300-days.png)
-
-Network after 400 days:
-![Network after 400 days](path/to/network-after-400-days.png)
 
 ### Community Type Network Analysis (Single Sect Model)
 
 This analysis aims to understand the relationship between the network's overall ideological acceptance and how strongly connected the network is. The number of connections of an individual is varied from 10 to 200.
 
-At 10 connections:
-![At 10 connections](path/to/at-10-connections.png)
+Network Evolution:
+![Community Type Network](Images/community_network_analysis.png)
 
-At 50 connections:
-![At 50 connections](path/to/at-50-connections.png)
-
-At 200 connections:
-![At 200 connections](path/to/at-200-connections.png)
 
 The analysis shows that as the network becomes more strongly connected, a higher percentage of people accept the ideology in the same time period of 100 days.
 
@@ -150,24 +138,13 @@ The analysis shows that as the network becomes more strongly connected, a higher
 
 The aim is to understand how powerfully a highly connected individual (influencer) can impact the overall ideological alignment of the network. A few individuals (influencers) with a high number of connections (300) are induced in the network.
 
-Visualization of the network model:
-![Visualization of the network model](path/to/network-visualization.png)
+The following graphs shows the network initially and after 100 days without the influencers:
+![After 100 days without influencers](Images/twitter_type_network.png)
 
-The following graphs show the network after 100 days without the influencers:
-
-After 100 days:
-![After 100 days without influencers](path/to/without-influencers-after-100-days.png)
-
-Initial situation:
-![Initial situation without influencers](path/to/without-influencers-initial.png)
 
 The following graphs show the network after 100 days with the influencers:
+![After 100 days with influencers](Images/twitter_type_network_2.png)
 
-After 100 days:
-![After 100 days with influencers](path/to/with-influencers-after-100-days.png)
-
-Initial situation:
-![Initial situation with influencers](path/to/with-influencers-initial.png)
 
 The analysis shows that the influencers were able to convince people much more of their ideologies in comparison to a normal community-type network.
 
@@ -180,7 +157,7 @@ After 100 days:
 - Party A - 33.3%
 - Party B - 14.4%
 
-![Base condition](path/to/base-condition.png)
+![Base condition](Images/election_base.png)
 
 Impact of High Connections:
 Party A is given 20 people with 200 connections each.
@@ -188,11 +165,15 @@ After 100 days:
 - Party A - 39.8%
 - Party B - 16.2%
 
+![Impact Of High Connections](Images/election_high_connect.png)
+
 High Connections versus High Count:
 Party A is given 4 people with 400 connections, and Party B is given 20 people with 50 connections.
 After 100 days:
 - Party A - 39.2%
 - Party B - 7%
+
+![High Connections VS High Count](Images/election_connect_vs_count.png)
 
 The analysis shows that highly influential individuals (with high connections) win over a large number of less connected individuals from the opposing party.
 
