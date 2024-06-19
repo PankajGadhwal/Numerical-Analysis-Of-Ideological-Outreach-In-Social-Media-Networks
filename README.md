@@ -1,5 +1,5 @@
 # Simulation Of Network Evolving
-![Network Evolution](Images/evolving_network.png)
+![Network Evolution](Images/evolving_network.gif)
 
 
 # Numerical Analysis Of Ideological Outreach In Social Media Networks
