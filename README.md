@@ -180,4 +180,5 @@ The analysis shows that highly influential individuals (with high connections) w
 ## References
 
 [1] 'Truncated Normal Distribution', Wikipedia.org, Link: https://en.wikipedia.org/wiki/Truncated_normal_distribution
+<br>
 [2] 'Inside Twitter: An In-Depth Look Inside the Twitter World', Sysomos, April 2014.
