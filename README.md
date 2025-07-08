@@ -184,6 +184,7 @@ The analysis shows that highly influential individuals (with high connections) w
 ## Contributors
 
 Bhoumik Patidar
+Pankaj
 Dewansh Kumar
 
 ## References
